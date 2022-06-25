@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Module of define a empty class Square"""
+
+
 class Square:
-    """Represents an empty square."""
+    """Class Square empty"""
     pass
