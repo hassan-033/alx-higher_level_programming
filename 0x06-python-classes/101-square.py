@@ -1,54 +1,85 @@
 #!/usr/bin/python3
 class Square:
+    
+    
+    
+    """Represents a square.
+    Private instance attribute: size:
+        - property def size(self)
+        - property setter def size(self, value)
+    Private instance attribute: position:
+        - property def position(self)
+        - property setter def position(self, value)
+    Instantiation with optional size and optional position.
+    Public instance method: def area(self).
+    Public instance method: def my_print(self).
+    """
+
     def __init__(self, size=0, position=(0, 0)):
-        if (type(size) != int):
-            raise TypeError("size must be an integer")
-        elif (size < 0):
-            raise ValueError("size must be >= 0")
-        else:
-            self.__size = size
+        """Initializes the data."""
+        self.__size = size
+        self.__position = position
 
-        if (type(position) != tuple or len(position) != 2):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        elif (type(position[0]) != int or type(position[1]) != int):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        elif (position[0] < 0 or position[1] < 0):
-            raise TypeError("position must be a tuple of 2 positive integers")
+    def __str__(self):
+        """Str method for print from main module."""
+        my_str = ""
+        if self.__size == 0:
+            return ''
         else:
-            self.__position = position
-
-    def area(self):
-        return (self.__size * self.__size)
+            my_str += '\n' * self.__position[1]
+            for i in range(0, self.__size):
+                my_str += ' ' * self.__position[0]
+                my_str += '#' * self.__size
+                my_str += '\n'
+            return my_str[:-1]
 
     @property
     def size(self):
+        """Retrieves the size."""
         return self.__size
 
     @size.setter
     def size(self, value):
-        if (type(value) != int):
+        """Sets the size to a value."""
+        if not isinstance(value, int):
             raise TypeError("size must be an integer")
-        else:
-            self.__size = value
+        elif value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
 
     @property
     def position(self):
+        """Retrieves the position."""
         return self.__position
 
     @position.setter
     def position(self, value):
-        if (type(value) != tuple or len(value) != 2):
+        """Sets the position to a value."""
+        if not isinstance(value, tuple) or len(value) != 2:
             raise TypeError("position must be a tuple of 2 positive integers")
-        elif (type(value[0]) != int or type(value[1]) != int):
+        if not isinstance(value[0], int) or not isinstance(value[1], int):
             raise TypeError("position must be a tuple of 2 positive integers")
-        elif (value[0] < 0 or value[1] < 0):
+        if value[0] < 0 or value[1] < 0:
             raise TypeError("position must be a tuple of 2 positive integers")
-        else:
-            self.__position = value
+        self.__position = value
+
+    def area(self):
+        """Returns the current square area."""
+        return self.__size ** 2
 
     def my_print(self):
-        if (self.__size != 0):
-            print((self.__position[1] * '\n'), end="")
-            for i in range(self.__size):
-                print((self.__position[0] * " "), end='')
-                print(self.__size * "#")
+        """Prints to stdout the square with the character #,
+        at the position given by the position attribute.
+        """
+        if self.__size == 0:
+            print()
+        else:
+            for y in range(0, self.__position[1]):
+                print()
+            for i in range(0, self.__size):
+                for x in range(0, self.__position[0]):
+                    print(" ", end="")
+                for j in range(0, self.__size):
+                    print("#", end="")
+                print()
+            return ''
