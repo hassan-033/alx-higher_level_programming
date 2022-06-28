@@ -1,87 +1,73 @@
 #!/usr/bin/python3
-"""
-Documentation for Class Rectangle
+"""This module  has a class for rectangule instances.
+The module has the class Rectangle.
 """
 
 
 class Rectangle:
-    """
-    Generic Rectangle object
+    """class rectangle.
+    the class defines the height and width prived
+    instance attributes, getter and setter method for each
+    area and permiter methods,  __str__ implementation
+    __repr__ to be print with print() and str()
     """
 
     def __init__(self, width=0, height=0):
-        """Initilization method for the Rectangle class.
-        Args:
-            width(int): Width fo Rectangle
-            height(int): Height of Rectangle
-        """
-        self.width = width
-        self.height = height
-
-    def __str__(self):
-        """Method for formatted output
-        """
-        if self.__width and self.__height:
-            return (("#" * self.__width + '\n') * (self.__height - 1)) +
-            ("#" * self.__width)
+        if (type(height) != int):
+            raise TypeError("height must be an integer")
+        elif (height < 0):
+            raise ValueError("height must be >= 0")
         else:
-            return ""
-
-    def __repr__(self):
-        """Method for formatted output
-        """
-        return ("Rectangle(" + str(self.__width) + ", " +
-                str(self.__height) + ")")
+            self.__height = height
+        if (type(width) != int):
+            raise TypeError("width must be an integer")
+        elif (width < 0):
+            raise ValueError("width must be >= 0")
+        else:
+            self.__width = width
 
     def area(self):
-        """Method for Rectangle area
-        """
-        return self.__width * self.__height
+        return self.height * self.width
 
     def perimeter(self):
-        """Method for Rectangle perimiter
-        """
-        if self.__width and self.__height:
-            return self.__width * 2 + self.__height * 2
+        if (self.height == 0 or self.width == 0):
+            return 0
         else:
-            return int(0)
+            return 2 * self.height + 2 * self.width
 
-    @property
-    def width(self):
-        """Getter method for width
-        """
-        return self.__width
+    def __str__(self):
+        if (self.height != 0 and self.width != 0):
+            a = self.width * "#" + "\n"
+            b = self.width * "#"
+            return ((self.height - 1) * a + b)
+        else:
+            return ("")
 
-    @width.setter
-    def width(self, value):
-
-        """Setter method for width
-        Args:
-            value(int): Width of Rectangle
-        """
-        if type(value) is not int:
-            raise TypeError('width must be an integer')
-        if value < 0:
-            raise ValueError('width must be >= 0')
-        self.__width = value
+    def __repr__(self):
+            return "Rectangle({}, {})".format(self.width, self.height)
 
     @property
     def height(self):
-        """Getter method for height
-        """
         return self.__height
 
     @height.setter
     def height(self, value):
+        if (type(value) != int):
+            raise TypeError("height must be an integer")
+        elif (value < 0):
+            raise ValueError("height must be >= 0")
+        else:
+            self.__height = value
 
-        """Setter method for height
-        Args:
-            value(int): Height of Rectangle
-        """
-        if type(value) is not int:
-            raise TypeError('height must be an integer')
-        if value < 0:
-            raise ValueError('height must be >= 0')
-        self.__height = value
+    @property
+    def width(self):
+        return self.__width
 
-   
+    @width.setter
+    def width(self, value):
+        if (type(value) != int):
+            raise TypeError("width must be an integer")
+        elif (value < 0):
+            raise ValueError("width must be >= 0")
+        else:
+            self.__width = value
